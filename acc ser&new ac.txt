@@ -1,0 +1,38 @@
+public without sharing class ACCctrl  {
+   public Account account{get; set;}
+   public List<Account> accs {set;get;}
+   public string accName {set;get;}
+   public string accIndustry {set;get;} 
+   public ACCctrl (){
+   
+       account = new Account();
+       accs=[select name,id,industry from Account];
+   }
+      public void search(){
+         String AccountPrompt = %+accName+%;
+         String IndustryPrompt = %+accIndustry+%;
+      if(accName!= && accindustry!=){
+      accs=[select name,id,industry from Account where name LIKE :AccountPrompt and industry LIKE :IndustryPrompt ];           
+      }else{
+          if(accName!=){
+      accs=[select name,industry from Account where name LIKE :AccountPrompt ];           
+          }else{
+              if(accIndustry!=){
+      accs=[select name,industry from Account where industry LIKE :IndustryPrompt ];           
+              }else{
+                  if(accIndustry== && accName==){
+      accs=[select name,industry from Account];           
+              }
+                  
+              }
+              
+          }
+          
+      }
+  }
+  
+   public void save(){
+       insert account;
+       upsert account;
+   }
+}
